@@ -6,7 +6,6 @@ inputs:
     required: false
     default: ./requirements.pipx.txt
 
-
 runs:
   using: composite
   steps:
