@@ -1,0 +1,23 @@
+name: pipx install
+description: pipx install
+inputs:
+  requirements-file:
+    description: Path to the requirements file
+    required: false
+    default: ./requirements.pipx.txt
+
+
+runs:
+  using: composite
+  steps:
+    - name: cat ${{ inputs.requirements-file }}
+      shell: bash
+      run: cat ${{ inputs.requirements-file }}
+
+    - name: pipx install
+      shell: bash
+      run: cat ${{ inputs.requirements-file }} | sed 's/.*/"&"/' | xargs -n 1 pipx install
+
+    - name: pipx list
+      shell: bash
+      run: pipx list
