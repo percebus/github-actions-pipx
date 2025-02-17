@@ -52,7 +52,7 @@ jobs:
           - poetry
           - uv
 
-    name: "example: ${{ matrix.example }}"
+    name: "${{ matrix.example }}/requirements.pipx.txt"
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: percebus/github-actions-common/.github/actions/checkout@main
@@ -61,6 +61,6 @@ jobs:
 
       - uses: ./.github/actions/pipx_install
         with:
-          requirements-file: ./assets/examples/${{ matrix.requirements-file }}/requirements.pipx.txt
+          requirements-file: ./assets/examples/${{ matrix.example }}/requirements.pipx.txt
 
       - uses: percebus/github-actions-pip/.github/actions/pip_freeze@main
