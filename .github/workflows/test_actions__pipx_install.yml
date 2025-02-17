@@ -1,4 +1,4 @@
-name: Test example1
+name: Test actions/pipx_install
 
 on:
   push:
