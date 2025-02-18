@@ -66,4 +66,4 @@ jobs:
       - uses: percebus/github-actions-pip/.github/actions/pip_freeze@main
 
       - name: pipx run
-        run: pipx run -- ${{ matrix.exampe}} --help
+        run: pipx run -- ${{ matrix.example }} --help
