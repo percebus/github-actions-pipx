@@ -7,7 +7,6 @@ on:
 jobs:
   default:
     runs-on: ubuntu-latest
-
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: percebus/github-actions-python/.github/actions/python_setup@main
@@ -52,7 +51,7 @@ jobs:
           - poetry
           - uv
 
-    name: "${{ matrix.example }}/requirements.pipx.txt"
+    name: "-r ${{ matrix.example }}/requirements.pipx.txt"
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: percebus/github-actions-common/.github/actions/checkout@main
