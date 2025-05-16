@@ -9,6 +9,10 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: cat ${{ inputs.requirements-file }}
+      shell: bash
+      run: cat ${{ inputs.requirements-file }}
+
     - name: pip-audit
       shell: bash
       run: pipx run -- pip-audit --requirement ${{ inputs.requirements-file }}
