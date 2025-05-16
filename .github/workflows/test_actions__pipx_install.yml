@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: percebus/github-actions-python/.github/actions/setup@main
-      - uses: percebus/github-actions-pip/.github/actions/pip_install_upgrade@main
+      - uses: percebus/github-actions-pip/.github/actions/pip-upgrade@main
       - uses: ./.github/actions/pipx_install
       - uses: percebus/github-actions-pip/.github/actions/pip_freeze@main
 
@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: percebus/github-actions-pip/.github/actions/pip_install_upgrade@main
+      - uses: percebus/github-actions-pip/.github/actions/pip-upgrade@main
       - uses: ./.github/actions/pipx_install
       - uses: percebus/github-actions-pip/.github/actions/pip_freeze@main
 
@@ -59,7 +59,7 @@ jobs:
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: percebus/github-actions-python/.github/actions/setup@main
-      - uses: percebus/github-actions-pip/.github/actions/pip_install_upgrade@main
+      - uses: percebus/github-actions-pip/.github/actions/pip-upgrade@main
 
       - uses: ./.github/actions/pipx_install
         with:
