@@ -1,0 +1,14 @@
+name: pip-audit
+description: pipx run pip-audit
+inputs:
+  requirements-file:
+    description: Path to the requirements file
+    required: false
+    default: ./requirements.txt
+
+runs:
+  using: composite
+  steps:
+    - name: pip-audit
+      shell: bash
+      run: pipx run -- pip-audit --requirement ${{ inputs.requirements-file }}

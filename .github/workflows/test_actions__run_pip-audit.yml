@@ -1,4 +1,4 @@
-name: Test actions/pipx_install
+name: Test actions/run_pip-audit
 
 on:
   push:
@@ -11,8 +11,7 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: percebus/github-actions-python/.github/actions/python_setup@main
       - uses: percebus/github-actions-pip/.github/actions/pip_install_upgrade@main
-      - uses: ./.github/actions/pipx_install
-      - uses: percebus/github-actions-pip/.github/actions/pip_freeze@main
+      - uses: ./.github/actions/run_pip-audit
 
   python__matrix:
     needs: default
@@ -35,8 +34,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - uses: percebus/github-actions-pip/.github/actions/pip_install_upgrade@main
-      - uses: ./.github/actions/pipx_install
-      - uses: percebus/github-actions-pip/.github/actions/pip_freeze@main
+      - uses: ./.github/actions/run_pip-audit
+
 
   requirements-file__matrix:
     needs: default
@@ -49,8 +48,8 @@ jobs:
         example:
           - pypyr
           - poetry
-          - pip-audit
           - uv
+          - misc1
 
     name: "-r ${{ matrix.example }}/requirements.pipx.txt"
     steps:
@@ -58,11 +57,6 @@ jobs:
       - uses: percebus/github-actions-python/.github/actions/python_setup@main
       - uses: percebus/github-actions-pip/.github/actions/pip_install_upgrade@main
 
-      - uses: ./.github/actions/pipx_install
+      - uses: ./.github/actions/run_pip-audit
         with:
           requirements-file: ./assets/examples/${{ matrix.example }}/requirements.pipx.txt
-
-      - uses: percebus/github-actions-pip/.github/actions/pip_freeze@main
-
-      - name: pipx run
-        run: pipx run -- ${{ matrix.example }} --help
