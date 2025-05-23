@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: percebus/github-actions-python/.github/actions/setup@main
-      - uses: percebus/github-actions-pip/.github/actions/pip-upgrade@main
+      - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
       - uses: ./.github/actions/run_pip-audit
 
   python__matrix:
@@ -36,7 +36,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: percebus/github-actions-pip/.github/actions/pip-upgrade@main
+      - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
       - uses: ./.github/actions/run_pip-audit
 
   requirements-file__matrix:
@@ -57,7 +57,7 @@ jobs:
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: percebus/github-actions-python/.github/actions/setup@main
-      - uses: percebus/github-actions-pip/.github/actions/pip-upgrade@main
+      - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
 
       - uses: ./.github/actions/run_pip-audit
         with:
