@@ -1,4 +1,4 @@
-name: Test actions/pipx_install
+name: Test actions/install
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: percebus/github-actions-python/.github/actions/setup@main
       - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
-      - uses: ./.github/actions/pipx_install
+      - uses: ./.github/actions/install
       - uses: percebus/github-actions-pip/.github/actions/freeze@main
 
   python__matrix:
@@ -38,7 +38,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
-      - uses: ./.github/actions/pipx_install
+      - uses: ./.github/actions/install
       - uses: percebus/github-actions-pip/.github/actions/freeze@main
 
   requirements-file__matrix:
@@ -61,7 +61,7 @@ jobs:
       - uses: percebus/github-actions-python/.github/actions/setup@main
       - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
 
-      - uses: ./.github/actions/pipx_install
+      - uses: ./.github/actions/install
         with:
           requirements-file: ./assets/examples/${{ matrix.example }}/requirements.pipx.txt
 
