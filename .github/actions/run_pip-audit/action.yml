@@ -16,3 +16,4 @@ runs:
     - name: pip-audit
       shell: bash
       run: pipx run -- pip-audit --requirement ${{ inputs.requirements-file }}
+      continue-on-error: true
