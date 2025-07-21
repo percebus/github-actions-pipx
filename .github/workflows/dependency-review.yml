@@ -55,13 +55,15 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
 
 jobs:
   dependency-review:
     uses: percebus/github-actions-common/.github/workflows/dependency-review.yml@main
     with:
       ssh-private-key: ${{ inputs.ssh-private-key }}
+    permissions:
+      contents: read
+      pull-requests: read
 
   # NOTE: is this job redundant?
   # does dependency-review-action accomplish the same, and more?

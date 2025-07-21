@@ -105,6 +105,9 @@ on:
         required: false
         default: ./requirements.txt
 
+permissions:
+  contents: read
+
 jobs:
   pip-audit:
     name: pip-audit
