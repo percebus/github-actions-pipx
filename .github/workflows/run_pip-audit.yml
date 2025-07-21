@@ -128,6 +128,6 @@ jobs:
           pip_cli_options: ${{ inputs.pip_cli_options }}
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
-      - uses: percebus/github-actions-pipx/.github/workflows/run_pip-audit@main
+      - uses: percebus/github-actions-pipx/.github/actions/run_pip-audit@main
         with:
           requirements-file: ${{ inputs.audit-requirements-file }}
