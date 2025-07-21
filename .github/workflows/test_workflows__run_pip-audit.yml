@@ -1,0 +1,48 @@
+name: Test workflows/run_pip-audit
+
+on:
+  push:
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  default:
+    uses: ./.github/workflows/run_pip-audit.yml
+
+  python__matrix:
+    needs: default
+
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        python-version:
+          - "3.10"
+          - "3.11"
+          - "3.12"
+
+    name: python @ ${{ matrix.python-version }}
+    uses: ./.github/workflows/run_pip-audit.yml
+    with:
+      python-version: ${{ matrix.python-version }}
+
+  requirements-file__matrix:
+    needs: default
+
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        example:
+          - pypyr
+          - poetry
+          - uv
+          - misc1
+
+    name: "-r ${{ matrix.example }}/requirements.pipx.txt"
+    uses: ./.github/workflows/run_pip-audit.yml
+    with:
+      requirements-file: ./assets/examples/${{ matrix.example }}/requirements.pipx.txt
