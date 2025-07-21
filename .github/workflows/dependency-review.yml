@@ -66,7 +66,7 @@ jobs:
   # NOTE: is this job redundant?
   # does dependency-review-action accomplish the same, and more?
   audit:
-    uses: percebus/github-actions-npm/.github/workflows/run_pip-audit.yml@main
+    uses: percebus/github-actions-pipx/.github/workflows/run_pip-audit.yml@main
     with:
       # github-actions-common/.../checkout
       ssh-private-key: ${{ inputs.ssh-private-key }}

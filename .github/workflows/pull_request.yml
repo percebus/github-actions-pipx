@@ -25,8 +25,4 @@ jobs:
 
   pip-audit:
     name: pip-audit
-    runs-on: ubuntu-latest
-    steps:
-      - uses: percebus/github-actions-common/.github/actions/checkout@main
-      - uses: percebus/github-actions-python/.github/actions/setup@main
-      - uses: ./.github/actions/run_pip-audit
+    uses: ./.github/workflows/run_pip-audit.yml
