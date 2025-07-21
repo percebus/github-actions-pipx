@@ -2,7 +2,7 @@
 
 [`LICENSE`](./LICENSE)
 
-[![[C]ontinuous [I]ntegration](https://github.com/percebus/github-actions-pipx/actions/workflows/always.yml/badge.svg)](https://github.com/percebus/github-actions-pipx/actions/workflows/always.yml)
+[![[C]ontinuous [I]ntegration](https://github.com/percebus/github-actions-pipx/actions/workflows/always.yml/badge.svg)](https://github.com/percebus/github-actions-pipx/actions/workflows/always.yml) [![Pull Request](https://github.com/percebus/github-actions-pipx/actions/workflows/pull_request.yml/badge.svg?event=pull_request)](https://github.com/percebus/github-actions-pipx/actions/workflows/pull_request.yml)
 
 ## GitHub
 
@@ -15,6 +15,6 @@
 
 ### Workflows
 
-| workflow                                               | test  |
-| ------------------------------------------------------ | ----- |
-| [run_pip-audit](./.github/workflows/run_pip-audit.yml) | FIXME |
+| workflow                                               | test                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [run_pip-audit](./.github/workflows/run_pip-audit.yml) | [![Test workflows/run_pip-audit](https://github.com/percebus/github-actions-pipx/actions/workflows/test_workflows__run_pip-audit.yml/badge.svg)](https://github.com/percebus/github-actions-pipx/actions/workflows/test_workflows__run_pip-audit.yml) |
