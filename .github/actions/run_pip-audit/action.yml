@@ -6,6 +6,8 @@ inputs:
     required: false
     default: ./requirements.txt
 
+  # pip-audit_cli_arguments: # TODO?
+
 runs:
   using: composite
   steps:

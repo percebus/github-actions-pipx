@@ -1,0 +1,133 @@
+name: pipx run pip-audit
+
+on:
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+    inputs:
+      # github-actions-common/.../checkout
+      ssh-private-key:
+        type: string
+        description: SSH private key
+        required: false
+
+      #
+      # github-actions-python/.../setup
+      python-version-file:
+        type: string
+        description: Python version to install
+        required: false
+        default: "" # auto-detect
+
+      python-version:
+        type: string
+        description: Python version to install
+        required: false
+        default: ""
+
+      architecture:
+        type: string
+        description: Architecture to install python
+        required: false
+        default: x64
+      # NOTE: ^^^ github-actions-python/.../setup
+
+      #
+      # NOTE: vvv github-actions-pip/.../install-upgrade
+      pip_cli_options:
+        type: string
+        description: Options to pass to the pip command
+        required: false
+        default: "--verbose"
+
+      upgrade-requirements-file:
+        type: string
+        description: Path to the requirements file
+        required: false
+        default: ./requirements.upgrade.txt
+      # NOTE: ^^^ github-actions-pip/.../install-upgrade
+
+      #
+      # NOTE: github-actions-pipx/.../run_pip-audit
+      audit-requirements-file:
+        type: string
+        description: Path to the requirements file
+        required: false
+        default: ./requirements.txt
+
+  workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
+    inputs:
+      # github-actions-common/.../checkout
+      ssh-private-key:
+        type: string
+        description: SSH private key
+        required: false
+
+      #
+      # NOTE: vvv github-actions-python/.../setup
+      python-version-file:
+        type: string
+        description: Python version to install
+        required: false
+        default: "" # auto-detect
+
+      python-version:
+        type: string
+        description: Python version to install
+        required: false
+        default: ""
+
+      architecture:
+        type: string
+        description: Architecture to install python
+        required: false
+        default: x64
+      # NOTE: ^^^ github-actions-python/.../setup
+
+      #
+      # NOTE: vvv github-actions-pip/.../install-upgrade
+      pip_cli_options:
+        type: string
+        description: Options to pass to the pip command
+        required: false
+        default: "--verbose"
+
+      upgrade-requirements-file:
+        type: string
+        description: Path to the requirements file
+        required: false
+        default: ./requirements.upgrade.txt
+      # NOTE: ^^^ github-actions-pip/.../install-upgrade
+
+      #
+      # NOTE: github-actions-pipx/.../run_pip-audit
+      audit-requirements-file:
+        type: string
+        description: Path to the requirements file
+        required: false
+        default: ./requirements.txt
+
+permissions:
+  contents: read
+
+jobs:
+  pip-audit:
+    name: pip-audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+        with:
+          ssh-private-key: ${{ inputs.ssh-private-key }}
+
+      - uses: percebus/github-actions-python/.github/actions/setup@main
+        with:
+          python-version-file: ${{ inputs.python-version-file }}
+          python-version: ${{ inputs.python-version }}
+          architecture: ${{ inputs.python-version }}
+
+      - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
+        with:
+          pip_cli_options: ${{ inputs.pip_cli_options }}
+          requirements-file: ${{ inputs.upgrade-requirements-file }}
+
+      - uses: ./.github/actions/run_pip-audit
+        with:
+          requirements-file: ${{ inputs.audit-requirements-file }}
