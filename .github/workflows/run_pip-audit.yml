@@ -1,4 +1,4 @@
-name: npm audit
+name: pipx run pip-audit
 
 on:
   push:
@@ -107,8 +107,8 @@ on:
         default: ./requirements.txt
 
 jobs:
-  pipx_run_pip-audit:
-    name: npm audit
+  pip-audit:
+    name: pip-audit
     runs-on: ubuntu-latest
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
