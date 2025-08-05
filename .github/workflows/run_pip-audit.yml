@@ -135,7 +135,7 @@ jobs:
         with:
           python-version-file: ${{ inputs.python-version-file }}
           python-version: ${{ inputs.python-version }}
-          architecture: ${{ inputs.python-version }}
+          architecture: ${{ inputs.architecture }}
 
       - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
         with:
