@@ -19,10 +19,10 @@ jobs:
       max-parallel: 6
       matrix:
         python-version:
-          - 3.10
-          - 3.11
-          - 3.12
-          # - 3.13  # Already tested from .python-version
+          - "3.10"
+          - "3.11"
+          - "3.12"
+          # - "3.13"  # Already tested from .python-version
 
     name: python @ ${{ matrix.python-version }}
     uses: ./.github/workflows/run_pip-audit_path.yml
