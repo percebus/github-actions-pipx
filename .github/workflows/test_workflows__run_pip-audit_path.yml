@@ -1,4 +1,4 @@
-name: Test workflows/run_pip-audit
+name: Test workflows/run_pip-audit_path
 
 on:
   push:
@@ -12,13 +12,8 @@ permissions:
   contents: read
 
 jobs:
-  default:
-    uses: ./.github/workflows/run_pip-audit_path.yml
-
   python__matrix:
     # if: false # FIXME not working
-    needs: default
-
     strategy:
       fail-fast: false
       max-parallel: 6
@@ -34,8 +29,6 @@ jobs:
       python-version: ${{ matrix.python-version }}
 
   pyproject_toml__matrix:
-    needs: default
-
     strategy:
       fail-fast: false
       max-parallel: 6

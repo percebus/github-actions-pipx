@@ -46,7 +46,7 @@ on:
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
       #
-      # NOTE: vvv github-actions-pipx/.../run_pip-audit
+      # NOTE: vvv run_pip-audit
       audit-requirements-file:
         type: string
         description: Path to the requirements file
@@ -58,7 +58,7 @@ on:
         description: Options to pass to the pip-audit command
         required: false
         default: ""
-      # NOTE: ^^^ github-actions-pipx/.../run_pip-audit
+      # NOTE: ^^^ run_pip-audit
 
   workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
     inputs:
@@ -105,7 +105,7 @@ on:
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
       #
-      # NOTE: vvv github-actions-pipx/.../run_pip-audit
+      # NOTE: vvv run_pip-audit
       audit-requirements-file:
         type: string
         description: Path to the requirements file
@@ -117,7 +117,7 @@ on:
         description: Options to pass to the pip-audit command
         required: false
         default: ""
-      # NOTE: ^^^ github-actions-pipx/.../run_pip-audit
+      # NOTE: ^^^ run_pip-audit
 
 permissions:
   contents: read
