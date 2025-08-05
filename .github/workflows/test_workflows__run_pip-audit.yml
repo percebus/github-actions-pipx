@@ -16,7 +16,6 @@ jobs:
     uses: ./.github/workflows/run_pip-audit.yml
 
   python__matrix:
-    # if: false # FIXME not working
     needs: default
 
     strategy:
