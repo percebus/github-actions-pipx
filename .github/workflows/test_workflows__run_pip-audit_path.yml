@@ -12,7 +12,13 @@ permissions:
   contents: read
 
 jobs:
+  default:
+    uses: ./.github/workflows/run_pip-audit_path.yml
+    with:
+      project_path: ./assets/examples/uv_init
+
   python__matrix:
+    needs: default
     # if: false # FIXME not working
     strategy:
       fail-fast: false
@@ -27,9 +33,11 @@ jobs:
     name: python @ ${{ matrix.python-version }}
     uses: ./.github/workflows/run_pip-audit_path.yml
     with:
+      project_path: ./assets/examples/uv_init
       python-version: ${{ matrix.python-version }}
 
   pyproject_toml__matrix:
+    needs: default
     strategy:
       fail-fast: false
       max-parallel: 6
