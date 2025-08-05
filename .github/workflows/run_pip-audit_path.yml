@@ -65,7 +65,7 @@ on:
         type: string
         description: Options to pass to the pip-audit command
         required: false
-        default: "--locked"
+        default: ""
       # NOTE: ^^^ pip-audit
 
   workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
@@ -124,7 +124,7 @@ on:
         type: string
         description: Options to pass to the pip-audit command
         required: false
-        default: "--locked"
+        default: ""
       # NOTE: ^^^ pip-audit
 
 permissions:
