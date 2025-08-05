@@ -30,6 +30,7 @@ jobs:
       matrix:
         language:
           - actions
+          - python
 
     name: "CodeQL: ${{ matrix.language }}"
     steps:
