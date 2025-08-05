@@ -1,4 +1,4 @@
-name: Test workflows/run_pip-audit
+name: Test workflows/run_pip-audit_path
 
 on:
   push:
@@ -13,11 +13,12 @@ permissions:
 
 jobs:
   default:
-    uses: ./.github/workflows/run_pip-audit.yml
+    uses: ./.github/workflows/run_pip-audit_path.yml
+    with:
+      project_path: ./assets/examples/empty-pyproject
 
   python__matrix:
     needs: default
-
     strategy:
       fail-fast: false
       max-parallel: 6
@@ -29,24 +30,22 @@ jobs:
           # - "3.13"  # Already tested from .python-version
 
     name: python @ ${{ matrix.python-version }}
-    uses: ./.github/workflows/run_pip-audit.yml
+    uses: ./.github/workflows/run_pip-audit_path.yml
     with:
+      project_path: ./assets/examples/empty-pyproject
       python-version: ${{ matrix.python-version }}
 
-  requirements-file__matrix:
+  pyproject_toml__matrix:
     needs: default
-
+    if: false # FIXME pip-audit does NOT like algorithmic-excercises
     strategy:
       fail-fast: false
       max-parallel: 6
       matrix:
         example:
-          - pypyr
-          - poetry
-          - uv
-          - misc1
+          - algorithmic-excercises
 
-    name: "-r ${{ matrix.example }}/requirements.pipx.txt"
-    uses: ./.github/workflows/run_pip-audit.yml
+    name: "examples/${{ matrix.example }}"
+    uses: ./.github/workflows/run_pip-audit_path.yml
     with:
-      audit-requirements-file: ./assets/examples/${{ matrix.example }}/requirements.pipx.txt
+      project_path: ./assets/examples/${{ matrix.example }}

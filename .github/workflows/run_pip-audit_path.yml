@@ -47,11 +47,11 @@ on:
 
       #
       # NOTE: vvv run_pip-audit
-      audit-requirements-file:
+      project_path:
         type: string
         description: Path to the requirements file
         required: false
-        default: ./requirements.txt
+        default: .
 
       pip-audit_cli_arguments:
         type: string
@@ -106,11 +106,11 @@ on:
 
       #
       # NOTE: vvv run_pip-audit
-      audit-requirements-file:
+      project_path:
         type: string
         description: Path to the requirements file
         required: false
-        default: ./requirements.txt
+        default: .
 
       pip-audit_cli_arguments:
         type: string
@@ -142,7 +142,5 @@ jobs:
           pip_cli_options: ${{ inputs.pip_cli_options }}
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
-      - uses: percebus/github-actions-pipx/.github/actions/run_pip-audit@main
-        with:
-          requirements-file: ${{ inputs.audit-requirements-file }}
-          pip-audit_cli_arguments: ${{ inputs.pip-audit_cli_arguments }}
+      - name: pip-audit
+        run: pipx run -- pip-audit ${{ inputs.project_path }} ${{ inputs.pip-audit_cli_arguments }}

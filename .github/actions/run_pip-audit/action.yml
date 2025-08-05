@@ -6,7 +6,10 @@ inputs:
     required: false
     default: ./requirements.txt
 
-  # pip-audit_cli_arguments: # TODO?
+  pip-audit_cli_arguments:
+    description: Additional arguments to pass to pip-audit
+    required: false
+    default: ""
 
 runs:
   using: composite
@@ -15,7 +18,6 @@ runs:
       shell: bash
       run: cat ${{ inputs.requirements-file }}
 
-    - name: pip-audit
+    - name: pip-audit -r ${{ inputs.requirements-file }}
       shell: bash
-      run: pipx run -- pip-audit --requirement ${{ inputs.requirements-file }}
-      continue-on-error: true
+      run: pipx run -- pip-audit --requirement ${{ inputs.requirements-file }} ${{ inputs.pip-audit_cli_arguments }}
