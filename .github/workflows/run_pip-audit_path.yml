@@ -46,19 +46,27 @@ on:
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
       #
-      # NOTE: vvv github-actions-pipx/.../run_pip-audit
+      # NOTE: github-actions-pipx/.../run_pip-audit
       audit-requirements-file:
         type: string
         description: Path to the requirements file
         required: false
         default: ./requirements.txt
 
+      #
+      # NOTE: vvv pip-audit
+      project_path:
+        type: string
+        description: Path to the requirements file
+        required: false
+        default: .
+
       pip-audit_cli_arguments:
         type: string
         description: Options to pass to the pip-audit command
         required: false
-        default: ""
-      # NOTE: ^^^ github-actions-pipx/.../run_pip-audit
+        default: "--locked"
+      # NOTE: ^^^ pip-audit
 
   workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
     inputs:
@@ -105,19 +113,19 @@ on:
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
       #
-      # NOTE: vvv github-actions-pipx/.../run_pip-audit
-      audit-requirements-file:
+      # NOTE: vvv pip-audit
+      project_path:
         type: string
         description: Path to the requirements file
         required: false
-        default: ./requirements.txt
+        default: .
 
       pip-audit_cli_arguments:
         type: string
         description: Options to pass to the pip-audit command
         required: false
-        default: ""
-      # NOTE: ^^^ github-actions-pipx/.../run_pip-audit
+        default: "--locked"
+      # NOTE: ^^^ pip-audit
 
 permissions:
   contents: read
@@ -142,7 +150,5 @@ jobs:
           pip_cli_options: ${{ inputs.pip_cli_options }}
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
-      - uses: percebus/github-actions-pipx/.github/actions/run_pip-audit@main
-        with:
-          requirements-file: ${{ inputs.audit-requirements-file }}
-          pip-audit_cli_arguments: ${{ inputs.pip-audit_cli_arguments }}
+      - name: pip-audit
+        run: pipx run -- pip-audit ${{ inputs.project_path }} ${{ inputs.pip-audit_cli_arguments }}
