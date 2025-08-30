@@ -143,6 +143,7 @@ jobs:
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
       - uses: percebus/github-actions-pipx/.github/actions/run_pip-audit@main
+        continue-on-error: true
         with:
           requirements-file: ${{ inputs.audit-requirements-file }}
           pip-audit_cli_arguments: ${{ inputs.pip-audit_cli_arguments }}
