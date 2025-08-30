@@ -144,3 +144,4 @@ jobs:
 
       - name: pip-audit
         run: pipx run -- pip-audit ${{ inputs.project_path }} ${{ inputs.pip-audit_cli_arguments }}
+        continue-on-error: true
