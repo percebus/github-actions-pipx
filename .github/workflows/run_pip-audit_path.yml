@@ -142,6 +142,7 @@ jobs:
           pip_cli_options: ${{ inputs.pip_cli_options }}
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
+      # TODO? use gh-action-pip-audit? SEE: https://github.com/pypa/gh-action-pip-audit
       - name: pip-audit
         run: pipx run -- pip-audit ${{ inputs.project_path }} ${{ inputs.pip-audit_cli_arguments }}
         continue-on-error: true

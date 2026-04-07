@@ -18,6 +18,7 @@ runs:
       shell: bash
       run: cat ${{ inputs.requirements-file }}
 
+    # TODO? use gh-action-pip-audit? SEE: https://github.com/pypa/gh-action-pip-audit
     - name: pip-audit -r ${{ inputs.requirements-file }}
       shell: bash
       run: pipx run -- pip-audit --requirement ${{ inputs.requirements-file }} ${{ inputs.pip-audit_cli_arguments }}
