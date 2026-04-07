@@ -23,8 +23,3 @@ jobs:
   npm_audit:
     name: npm
     uses: percebus/github-actions-npm/.github/workflows/audit.yml@main
-
-  # XXX
-  # pip-audit:
-  #   name: pipx
-  #   uses: ./.github/workflows/run_pip-audit.yml
