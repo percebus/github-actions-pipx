@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   github-actions-pipx:
-    uses: ./.github/workflows/dependency-review.yml@main
+    uses: ./.github/workflows/dependency-review.yml
     name: github-actions-pipx
     permissions:
       contents: read
