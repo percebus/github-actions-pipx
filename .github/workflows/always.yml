@@ -1,8 +1,11 @@
 name: "[C]ontinuous [I]ntegration"
 
 on:
-  push:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+  pull_request:
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -29,10 +32,10 @@ jobs:
       matrix:
         language:
           - actions
-          - javascript
+          # - javascript # TODO? no JS files
           - python
 
-    name: "CodeQL: ${{ matrix.language }}"
+    name: CodeQL analyze
     uses: percebus/github-actions-compliance/.github/workflows/codeql_analyze.yml@main
     with:
       language: ${{ matrix.language }}
