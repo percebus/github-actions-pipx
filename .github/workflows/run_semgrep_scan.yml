@@ -50,7 +50,7 @@ on:
         type: string
         description: Semgrep config to use
         required: false
-        default: "p/default"
+        default: auto
       # NOTE: ^^^ semgrep
 
   workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
@@ -102,7 +102,7 @@ on:
         type: string
         description: Semgrep config to use
         required: false
-        default: "p/default"
+        default: auto
       # NOTE: ^^^ semgrep
 
 permissions:
