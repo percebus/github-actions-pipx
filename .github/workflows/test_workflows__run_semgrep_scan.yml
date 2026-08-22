@@ -35,3 +35,19 @@ jobs:
   #   uses: ./.github/workflows/run_semgrep_scan.yml
   #   with:
   #     python-version: ${{ matrix.python-version }}
+
+  #
+  config__matrix:
+    needs: default
+
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        config:
+          - "p/default"
+
+    name: "config: '${{ matrix.config }}'"
+    uses: ./.github/workflows/run_semgrep_scan.yml
+    with:
+      semgrep_config: ${{ matrix.config }}

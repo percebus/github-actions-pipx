@@ -15,24 +15,35 @@ permissions:
   contents: read
 
 jobs:
-  # XXX when it runs in `dependency-review.yml`
-  default:
-    uses: ./.github/workflows/run_semgrep_ci.yml
+  # default:
+  #   uses: ./.github/workflows/run_semgrep_ci.yml
 
-  # #
+  #
   # # TODO? or XXX?
   # python__matrix:
-  #   needs: default
-
   #   strategy:
   #     fail-fast: false
   #     max-parallel: 6
   #     matrix:
   #       python-version:
   #         - "3.13"
-  #         - "3.14"
+  #         # - "3.14"
 
   #   name: python @ ${{ matrix.python-version }}
   #   uses: ./.github/workflows/run_semgrep_ci.yml
   #   with:
   #     python-version: ${{ matrix.python-version }}
+
+  #
+  config__matrix:
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        config:
+          - "p/default"
+
+    name: "config: '${{ matrix.config }}'"
+    uses: ./.github/workflows/run_semgrep_ci.yml
+    with:
+      semgrep_config: ${{ matrix.config }}
