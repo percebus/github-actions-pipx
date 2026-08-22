@@ -50,4 +50,4 @@ jobs:
     name: "config: '${{ matrix.config }}'"
     uses: ./.github/workflows/run_semgrep_scan.yml
     with:
-      config: ${{ matrix.config }}
+      semgrep_config: ${{ matrix.config }}
