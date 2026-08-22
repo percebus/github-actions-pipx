@@ -135,4 +135,4 @@ jobs:
         run: pipx install semgrep
 
       - name: semgrep ci
-        run: pipx run -- semgrep ci --config "${{ inputs.semgrep_config }}" .
+        run: pipx run -- semgrep ci --config "${{ inputs.semgrep_config }}"
