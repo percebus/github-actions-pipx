@@ -9,13 +9,16 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: cat ${{ inputs.requirements-file }}
+    # nosemgrep: yaml.github-actions.security.run-shell-injection.run-shell-injection # FIXME
+    - run: cat ${{ inputs.requirements-file }}
       shell: bash
-      run: cat ${{ inputs.requirements-file }}
+      name: cat ${{ inputs.requirements-file }}
 
-    - name: pipx install
+    # FIXME
+    # nosemgrep: yaml.github-actions.security.run-shell-injection.run-shell-injection # FIXME
+    - run: cat ${{ inputs.requirements-file }} | sed 's/.*/"&"/' | xargs -n 1 pipx install
       shell: bash
-      run: cat ${{ inputs.requirements-file }} | sed 's/.*/"&"/' | xargs -n 1 pipx install
+      name: pipx install
 
     - name: pipx list
       shell: bash

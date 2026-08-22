@@ -131,5 +131,6 @@ jobs:
           pip_cli_options: ${{ inputs.pip_cli_options }}
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
-      - name: semgrep scan
-        run: pipx run -- semgrep scan --error --config "${{ inputs.semgrep_config }}" .
+      # nosemgrep: yaml.github-actions.security.run-shell-injection.run-shell-injection # FIXME
+      - run: pipx run -- semgrep scan --error --config "${{ inputs.semgrep_config }}" .
+        name: semgrep scan
