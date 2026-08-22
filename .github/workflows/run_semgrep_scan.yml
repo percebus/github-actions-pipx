@@ -132,4 +132,4 @@ jobs:
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
       - name: semgrep scan
-        run: pipx run -- semgrep scan --config "${{ inputs.semgrep_config }}" .
+        run: pipx run -- semgrep scan --error --config "${{ inputs.semgrep_config }}" .
