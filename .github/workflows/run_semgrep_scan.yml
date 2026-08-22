@@ -1,4 +1,4 @@
-name: pipx run pip-audit
+name: pipx run semgrep scan
 
 on:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
@@ -45,6 +45,14 @@ on:
         default: ./requirements.upgrade.txt
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
+      # NOTE: vvv semgrep
+      semgrep_config:
+        type: string
+        description: Semgrep config to use
+        required: false
+        default: "p/default"
+      # NOTE: ^^^ semgrep
+
   workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
     inputs:
       # github-actions-common/.../checkout
@@ -89,12 +97,20 @@ on:
         default: ./requirements.upgrade.txt
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
+      # NOTE: vvv semgrep
+      semgrep_config:
+        type: string
+        description: Semgrep config to use
+        required: false
+        default: "p/default"
+      # NOTE: ^^^ semgrep
+
 permissions:
   contents: read
 
 jobs:
-  pip-audit:
-    name: run pip-audit
+  semgrep_scan:
+    name: run semgrep scan
     runs-on: ubuntu-latest
     steps:
       # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
@@ -116,4 +132,4 @@ jobs:
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
       - name: semgrep scan
-        run: pipx run -- semgrep scan
+        run: pipx run -- semgrep scan --config "${{ inputs.semgrep_config }}" .
