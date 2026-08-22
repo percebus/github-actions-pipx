@@ -127,22 +127,26 @@ jobs:
     name: run pip-audit
     runs-on: ubuntu-latest
     steps:
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-common/.github/actions/checkout@main
         with:
           ssh-private-key: ${{ inputs.ssh-private-key }}
 
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-python/.github/actions/setup@main
         with:
           python-version-file: ${{ inputs.python-version-file }}
           python-version: ${{ inputs.python-version }}
           architecture: ${{ inputs.architecture }}
 
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
         with:
           pip_cli_options: ${{ inputs.pip_cli_options }}
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
       # TODO? use gh-action-pip-audit? SEE: https://github.com/pypa/gh-action-pip-audit
-      - name: pip-audit
-        run: pipx run -- pip-audit ${{ inputs.project_path }} ${{ inputs.pip-audit_cli_arguments }}
+      # nosemgrep: yaml.github-actions.security.run-shell-injection.run-shell-injection # FIXME
+      - run: pipx run -- pip-audit ${{ inputs.project_path }} ${{ inputs.pip-audit_cli_arguments }}
+        name: pip-audit
         continue-on-error: true

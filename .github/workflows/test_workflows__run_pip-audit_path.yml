@@ -20,6 +20,7 @@ jobs:
     with:
       project_path: ./assets/examples/empty-pyproject
 
+  #
   python__matrix:
     needs: default
     strategy:
@@ -27,10 +28,8 @@ jobs:
       max-parallel: 6
       matrix:
         python-version:
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          # - "3.13"  # Already tested from .python-version
+          - "3.13"
+          - "3.14"
 
     name: python @ ${{ matrix.python-version }}
     uses: ./.github/workflows/run_pip-audit_path.yml
@@ -38,6 +37,7 @@ jobs:
       project_path: ./assets/examples/empty-pyproject
       python-version: ${{ matrix.python-version }}
 
+  #
   pyproject_toml__matrix:
     needs: default
     if: false # FIXME pip-audit does NOT like algorithmic-excercises

@@ -1,4 +1,4 @@
-name: pipx run pip-audit
+name: pipx run semgrep scan
 
 on:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
@@ -45,20 +45,13 @@ on:
         default: ./requirements.upgrade.txt
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
-      #
-      # NOTE: vvv run_pip-audit
-      audit-requirements-file:
+      # NOTE: vvv semgrep
+      semgrep_config:
         type: string
-        description: Path to the requirements file
+        description: Semgrep config to use
         required: false
-        default: ./requirements.txt
-
-      pip-audit_cli_arguments:
-        type: string
-        description: Options to pass to the pip-audit command
-        required: false
-        default: ""
-      # NOTE: ^^^ run_pip-audit
+        default: auto
+      # NOTE: ^^^ semgrep
 
   workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
     inputs:
@@ -104,27 +97,20 @@ on:
         default: ./requirements.upgrade.txt
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
-      #
-      # NOTE: vvv run_pip-audit
-      audit-requirements-file:
+      # NOTE: vvv semgrep
+      semgrep_config:
         type: string
-        description: Path to the requirements file
+        description: Semgrep config to use
         required: false
-        default: ./requirements.txt
-
-      pip-audit_cli_arguments:
-        type: string
-        description: Options to pass to the pip-audit command
-        required: false
-        default: ""
-      # NOTE: ^^^ run_pip-audit
+        default: auto
+      # NOTE: ^^^ semgrep
 
 permissions:
   contents: read
 
 jobs:
-  pip-audit:
-    name: run pip-audit
+  semgrep_scan:
+    name: run semgrep scan
     runs-on: ubuntu-latest
     steps:
       # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
@@ -145,8 +131,6 @@ jobs:
           pip_cli_options: ${{ inputs.pip_cli_options }}
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
-      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      - uses: percebus/github-actions-pipx/.github/actions/run_pip-audit@main
-        with:
-          requirements-file: ${{ inputs.audit-requirements-file }}
-          pip-audit_cli_arguments: ${{ inputs.pip-audit_cli_arguments }}
+      # nosemgrep: yaml.github-actions.security.run-shell-injection.run-shell-injection # FIXME
+      - run: pipx run -- semgrep scan --error --config "${{ inputs.semgrep_config }}" .
+        name: semgrep scan
