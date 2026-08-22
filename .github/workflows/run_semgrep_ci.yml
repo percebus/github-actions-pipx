@@ -45,21 +45,6 @@ on:
         default: ./requirements.upgrade.txt
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
-      #
-      # NOTE: vvv run_pip-audit
-      audit-requirements-file:
-        type: string
-        description: Path to the requirements file
-        required: false
-        default: ./requirements.txt
-
-      pip-audit_cli_arguments:
-        type: string
-        description: Options to pass to the pip-audit command
-        required: false
-        default: ""
-      # NOTE: ^^^ run_pip-audit
-
   workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
     inputs:
       # github-actions-common/.../checkout
@@ -104,21 +89,6 @@ on:
         default: ./requirements.upgrade.txt
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
-      #
-      # NOTE: vvv run_pip-audit
-      audit-requirements-file:
-        type: string
-        description: Path to the requirements file
-        required: false
-        default: ./requirements.txt
-
-      pip-audit_cli_arguments:
-        type: string
-        description: Options to pass to the pip-audit command
-        required: false
-        default: ""
-      # NOTE: ^^^ run_pip-audit
-
 permissions:
   contents: read
 
@@ -145,8 +115,5 @@ jobs:
           pip_cli_options: ${{ inputs.pip_cli_options }}
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
-      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      - uses: percebus/github-actions-pipx/.github/actions/run_pip-audit@main
-        with:
-          requirements-file: ${{ inputs.audit-requirements-file }}
-          pip-audit_cli_arguments: ${{ inputs.pip-audit_cli_arguments }}
+      - run: semgrep ci
+        name: pipx run -- semgrep ci

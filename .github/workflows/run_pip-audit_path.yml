@@ -127,16 +127,19 @@ jobs:
     name: run pip-audit
     runs-on: ubuntu-latest
     steps:
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-common/.github/actions/checkout@main
         with:
           ssh-private-key: ${{ inputs.ssh-private-key }}
 
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-python/.github/actions/setup@main
         with:
           python-version-file: ${{ inputs.python-version-file }}
           python-version: ${{ inputs.python-version }}
           architecture: ${{ inputs.architecture }}
 
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
         with:
           pip_cli_options: ${{ inputs.pip_cli_options }}

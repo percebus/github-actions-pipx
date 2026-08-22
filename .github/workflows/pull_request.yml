@@ -21,5 +21,6 @@ jobs:
       pull-requests: read
 
   npm_audit:
-    name: npm
+    # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
     uses: percebus/github-actions-npm/.github/workflows/audit.yml@main
+    name: npm

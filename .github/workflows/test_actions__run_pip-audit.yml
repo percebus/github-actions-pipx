@@ -18,9 +18,15 @@ jobs:
   default:
     runs-on: ubuntu-latest
     steps:
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-common/.github/actions/checkout@main
+
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-python/.github/actions/setup@main
+
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
+
       - uses: ./.github/actions/run_pip-audit
 
   python__matrix:
@@ -38,12 +44,17 @@ jobs:
 
     name: python @ ${{ matrix.python-version }}
     steps:
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-common/.github/actions/checkout@main
+
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-python/.github/actions/setup@main
         with:
           python-version: ${{ matrix.python-version }}
 
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
+
       - uses: ./.github/actions/run_pip-audit
 
   requirements-file__matrix:
@@ -62,8 +73,13 @@ jobs:
 
     name: "-r ${{ matrix.example }}/requirements.pipx.txt"
     steps:
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-common/.github/actions/checkout@main
+
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-python/.github/actions/setup@main
+
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
 
       - uses: ./.github/actions/run_pip-audit

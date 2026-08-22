@@ -20,6 +20,7 @@ jobs:
     with:
       project_path: ./assets/examples/empty-pyproject
 
+  #
   python__matrix:
     needs: default
     strategy:
@@ -38,6 +39,7 @@ jobs:
       project_path: ./assets/examples/empty-pyproject
       python-version: ${{ matrix.python-version }}
 
+  #
   pyproject_toml__matrix:
     needs: default
     if: false # FIXME pip-audit does NOT like algorithmic-excercises
