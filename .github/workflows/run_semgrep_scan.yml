@@ -115,5 +115,5 @@ jobs:
           pip_cli_options: ${{ inputs.pip_cli_options }}
           requirements-file: ${{ inputs.upgrade-requirements-file }}
 
-      - run: semgrep scan
-        name: pipx run -- semgrep scan
+      - name: semgrep scan
+        run: pipx run -- semgrep scan

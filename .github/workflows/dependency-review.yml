@@ -58,6 +58,7 @@ permissions:
 
 jobs:
   dependency-review:
+    # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
     uses: percebus/github-actions-compliance/.github/workflows/dependency-review.yml@main
     with:
       ssh-private-key: ${{ inputs.ssh-private-key }}
@@ -68,7 +69,9 @@ jobs:
   # NOTE: is this job redundant?
   # does dependency-review-action accomplish the same, and more?
   audit:
+    # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
     uses: percebus/github-actions-pipx/.github/workflows/run_pip-audit.yml@main
+    name: pipx run
     with:
       # github-actions-common/.../checkout
       ssh-private-key: ${{ inputs.ssh-private-key }}
@@ -88,6 +91,7 @@ jobs:
   # TODO when in main
   # semgrep_ci:
   #   uses: percebus/github-actions-pipx/.github/workflows/run_semgrep_ci.yml@main
+  #   name: pipx run
   #   with:
   #     # github-actions-common/.../checkout
   #     ssh-private-key: ${{ inputs.ssh-private-key }}
