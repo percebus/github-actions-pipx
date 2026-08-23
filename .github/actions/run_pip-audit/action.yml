@@ -10,7 +10,7 @@ inputs:
     description: Path to the requirements file
     required: false
     default: ./requirements.txt
-  
+
   continue-on-error:
     description: Whether to continue on error
     required: false
