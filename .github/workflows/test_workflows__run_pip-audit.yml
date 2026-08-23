@@ -42,12 +42,12 @@ jobs:
       max-parallel: 6
       matrix:
         example:
-          - pypyr
-          - poetry
-          - uv
-          - misc1
+          - pypyr/requirements.pipx.txt
+          - poetry/requirements.pipx.txt
+          - uv/requirements.pipx.txt
+          - misc1/requirements.pipx.txt
 
-    name: "-r ${{ matrix.example }}/requirements.pipx.txt"
+    name: "-r ${{ matrix.example }}"
     uses: ./.github/workflows/run_pip-audit.yml
     with:
-      audit-requirements-file: ./assets/examples/${{ matrix.example }}/requirements.pipx.txt
+      audit-requirements-file: ./assets/examples/${{ matrix.example }}

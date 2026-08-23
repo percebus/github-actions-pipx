@@ -47,15 +47,21 @@ on:
 
       #
       # NOTE: vvv run_pip-audit
+      pip-audit_cli_arguments:
+        type: string
+        description: Options to pass to the pip-audit command
+        required: false
+        default: ""
+
       audit-requirements-file:
         type: string
         description: Path to the requirements file
         required: false
         default: ./requirements.txt
 
-      pip-audit_cli_arguments:
+      release-requirements-file:
         type: string
-        description: Options to pass to the pip-audit command
+        description: Path to the requirements file
         required: false
         default: ""
       # NOTE: ^^^ run_pip-audit
@@ -106,15 +112,21 @@ on:
 
       #
       # NOTE: vvv run_pip-audit
+      pip-audit_cli_arguments:
+        type: string
+        description: Options to pass to the pip-audit command
+        required: false
+        default: ""
+
       audit-requirements-file:
         type: string
         description: Path to the requirements file
         required: false
         default: ./requirements.txt
 
-      pip-audit_cli_arguments:
+      release-requirements-file:
         type: string
-        description: Options to pass to the pip-audit command
+        description: Path to the requirements file
         required: false
         default: ""
       # NOTE: ^^^ run_pip-audit
@@ -147,6 +159,17 @@ jobs:
 
       # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-pipx/.github/actions/run_pip-audit@main
+        continue-on-error: true
         with:
           requirements-file: ${{ inputs.audit-requirements-file }}
           pip-audit_cli_arguments: ${{ inputs.pip-audit_cli_arguments }}
+          continue-on-error: "true"
+
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+      - uses: percebus/github-actions-pipx/.github/actions/run_pip-audit@main
+        if: ${{ inputs.release-requirements-file != "" }}
+        continue-on-error: false
+        with:
+          requirements-file: ${{ inputs.release-requirements-file }}
+          pip-audit_cli_arguments: ${{ inputs.pip-audit_cli_arguments }}
+          continue-on-error: "false"

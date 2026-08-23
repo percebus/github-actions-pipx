@@ -1,15 +1,20 @@
 name: pip-audit
 description: pipx run pip-audit
 inputs:
-  requirements-file:
-    description: Path to the requirements file
-    required: false
-    default: ./requirements.txt
-
   pip-audit_cli_arguments:
     description: Additional arguments to pass to pip-audit
     required: false
     default: ""
+
+  requirements-file:
+    description: Path to the requirements file
+    required: false
+    default: ./requirements.txt
+  
+  continue-on-error:
+    description: Whether to continue on error
+    required: false
+    default: "true"
 
 runs:
   using: composite
@@ -24,4 +29,4 @@ runs:
     - run: pipx run -- pip-audit --requirement ${{ inputs.requirements-file }} ${{ inputs.pip-audit_cli_arguments }}
       name: pip-audit -r ${{ inputs.requirements-file }}
       shell: bash
-      continue-on-error: true
+      continue-on-error: ${{ inputs.continue-on-error == 'true' }}
