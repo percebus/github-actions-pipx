@@ -167,7 +167,7 @@ jobs:
 
       # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-pipx/.github/actions/run_pip-audit@main
-        if: ${{ inputs.release-requirements-file != "" }}
+        if: ${{ inputs.release-requirements-file != '' }}
         continue-on-error: false
         with:
           requirements-file: ${{ inputs.release-requirements-file }}
