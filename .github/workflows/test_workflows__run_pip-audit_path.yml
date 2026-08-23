@@ -46,7 +46,7 @@ jobs:
       max-parallel: 6
       matrix:
         example:
-          - algorithmic-excercises
+          - algorithmic-excercises_poetry
 
     name: "examples/${{ matrix.example }}"
     uses: ./.github/workflows/run_pip-audit_path.yml
