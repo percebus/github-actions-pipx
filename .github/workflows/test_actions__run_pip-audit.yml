@@ -29,6 +29,7 @@ jobs:
 
       - uses: ./.github/actions/run_pip-audit
 
+  #
   python__matrix:
     needs: default
     runs-on: ubuntu-latest
@@ -38,9 +39,8 @@ jobs:
       max-parallel: 6
       matrix:
         python-version:
-          - "3.10"
-          - "3.11"
-          - "3.12"
+          - "3.13"
+          - "3.14"
 
     name: python @ ${{ matrix.python-version }}
     steps:
@@ -57,6 +57,7 @@ jobs:
 
       - uses: ./.github/actions/run_pip-audit
 
+  #
   requirements-file__matrix:
     needs: default
     runs-on: ubuntu-latest
@@ -66,12 +67,12 @@ jobs:
       max-parallel: 6
       matrix:
         example:
-          - pypyr
-          - poetry
-          - uv
-          - misc1
+          - pypyr/requirements.pipx.txt
+          - poetry/requirements.pipx.txt
+          - uv/requirements.pipx.txt
+          - misc1/requirements.pipx.txt
 
-    name: "-r ${{ matrix.example }}/requirements.pipx.txt"
+    name: "-r ${{ matrix.example }}"
     steps:
       # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
       - uses: percebus/github-actions-common/.github/actions/checkout@main
@@ -84,4 +85,64 @@ jobs:
 
       - uses: ./.github/actions/run_pip-audit
         with:
-          requirements-file: ./assets/examples/${{ matrix.example }}/requirements.pipx.txt
+          requirements-file: ./assets/examples/${{ matrix.example }}
+
+  #
+  # FIXME takes forever
+  # algorithmic-exercises__matrix:
+  #   needs: default
+  #   runs-on: ubuntu-latest
+
+  #   strategy:
+  #     fail-fast: false
+  #     max-parallel: 6
+  #     matrix:
+  #       example:
+  #         - requirements.frozen.txt
+
+  #   name: "-r ${{ matrix.example }}"
+  #   steps:
+  #     # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+  #     - uses: percebus/github-actions-common/.github/actions/checkout@main
+
+  #     # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+  #     - uses: percebus/github-actions-python/.github/actions/setup@main
+
+  #     # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+  #     - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
+
+  #     - uses: ./.github/actions/run_pip-audit
+  #       with:
+  #         requirements-file: ./assets/examples/algorithmic-exercises_pip/${{ matrix.example }}
+
+  #
+  algorithmic-exercises_require-hashes__matrix:
+    needs: default
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        example:
+          - requirements.txt
+          - requirements.release.txt
+          - requirements.poetry.main.txt
+          - requirements.poetry.cli.txt
+          - requirements.poetry.dev.txt
+
+    name: "-r ${{ matrix.example }}"
+    steps:
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+      - uses: percebus/github-actions-python/.github/actions/setup@main
+
+      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+      - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
+
+      - uses: ./.github/actions/run_pip-audit
+        with:
+          requirements-file: ./assets/examples/algorithmic-exercises_pip/${{ matrix.example }}
+          pip-audit_cli_arguments: "--require-hashes --disable-pip"

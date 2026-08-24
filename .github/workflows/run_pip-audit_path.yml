@@ -57,7 +57,14 @@ on:
         type: string
         description: Options to pass to the pip-audit command
         required: false
-        default: ""
+        # default: "--locked" # FIXME
+        default: "" # XXX
+
+      continue-on-error:
+        type: boolean
+        description: Continue on error
+        required: false
+        default: true
       # NOTE: ^^^ run_pip-audit
 
   workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
@@ -116,7 +123,14 @@ on:
         type: string
         description: Options to pass to the pip-audit command
         required: false
-        default: ""
+        # default: "--locked" # FIXME
+        default: "" # XXX
+
+      continue-on-error:
+        type: boolean
+        description: Continue on error
+        required: false
+        default: true
       # NOTE: ^^^ run_pip-audit
 
 permissions:
@@ -149,4 +163,4 @@ jobs:
       # nosemgrep: yaml.github-actions.security.run-shell-injection.run-shell-injection # FIXME
       - run: pipx run -- pip-audit ${{ inputs.project_path }} ${{ inputs.pip-audit_cli_arguments }}
         name: pip-audit
-        continue-on-error: true
+        continue-on-error: ${{ inputs.continue-on-error }}
