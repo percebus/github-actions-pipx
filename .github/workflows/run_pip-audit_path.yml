@@ -58,7 +58,7 @@ on:
         description: Options to pass to the pip-audit command
         required: false
         default: "--locked"
-      
+
       continue-on-error:
         type: boolean
         description: Continue on error

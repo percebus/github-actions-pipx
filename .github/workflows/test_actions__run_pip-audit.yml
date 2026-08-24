@@ -71,7 +71,7 @@ jobs:
           - poetry/requirements.pipx.txt
           - uv/requirements.pipx.txt
           - misc1/requirements.pipx.txt
-  
+
     name: "-r ${{ matrix.example }}"
     steps:
       # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
@@ -86,7 +86,7 @@ jobs:
       - uses: ./.github/actions/run_pip-audit
         with:
           requirements-file: ./assets/examples/${{ matrix.example }}
-  
+
   #
   algorithmic-exercises__matrix:
     needs: default
@@ -114,7 +114,7 @@ jobs:
 
       - uses: ./.github/actions/run_pip-audit
         with:
-          requirements-file: ./assets/examples/${{ matrix.example }}
+          requirements-file: ./assets/examples/algorithmic-exercises_pip/${{ matrix.example }}
 
   #
   algorithmic-exercises_require-hashes__matrix:
