@@ -97,9 +97,7 @@ jobs:
       max-parallel: 6
       matrix:
         example:
-          - requirements.txt
           - requirements.frozen.txt
-          - requirements.release.txt
 
     name: "-r ${{ matrix.example }}"
     steps:
@@ -126,6 +124,8 @@ jobs:
       max-parallel: 6
       matrix:
         example:
+          - requirements.txt
+          - requirements.release.txt
           - requirements.poetry.main.txt
           - requirements.poetry.cli.txt
           - requirements.poetry.dev.txt
