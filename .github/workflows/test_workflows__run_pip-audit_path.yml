@@ -48,7 +48,7 @@ jobs:
         example:
           - algorithmic-exercises_poetry
 
-    name: "examples/${{ matrix.example }}"
+    name: ${{ matrix.example }}
     uses: ./.github/workflows/run_pip-audit_path.yml
     with:
       project_path: ./assets/examples/${{ matrix.example }}
