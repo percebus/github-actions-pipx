@@ -27,6 +27,15 @@ jobs:
       audit-requirements-file: ./assets/examples/algorithmic-exercises_pip/requirements.txt
       release-requirements-file: ./assets/examples/algorithmic-exercises_pip/requirements.release.txt
 
+  algorithmic-exercises_requirements_require-hashes:
+    needs: default
+    name: "algorithmic-exercises: requirements"
+    uses: ./.github/workflows/run_pip-audit.yml
+    with:
+      pip-audit_cli_arguments: "--require-hashes --disable-pip"
+      audit-requirements-file: ./assets/examples/algorithmic-exercises_pip/requirements.poetry.dev.txt
+      release-requirements-file: ./assets/examples/algorithmic-exercises_pip/requirements.poetry.main.txt
+
   #
   python__matrix:
     needs: default
