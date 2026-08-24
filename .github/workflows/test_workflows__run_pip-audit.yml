@@ -18,6 +18,14 @@ jobs:
   default:
     uses: ./.github/workflows/run_pip-audit.yml
 
+  algorithmic-exercises_requirements:
+    needs: default
+    name: "algorithmic-exercises: requirements"
+    uses: ./.github/workflows/run_pip-audit.yml
+    with:
+      audit-requirements-file: ./assets/examples/algorithmic-exercises_pip/requirements.txt
+      release-requirements-file: ./assets/examples/algorithmic-exercises_pip/requirements.release.txt
+
   #
   python__matrix:
     needs: default
