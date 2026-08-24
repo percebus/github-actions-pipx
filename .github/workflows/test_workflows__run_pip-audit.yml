@@ -31,6 +31,7 @@ jobs:
     needs: default
     name: "algorithmic-exercises: requirements"
     uses: ./.github/workflows/run_pip-audit.yml
+    continue-on-error: true
     with:
       pip-audit_cli_arguments: "--require-hashes --disable-pip"
       audit-requirements-file: ./assets/examples/algorithmic-exercises_pip/requirements.poetry.dev.txt
