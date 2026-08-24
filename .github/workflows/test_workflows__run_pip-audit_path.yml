@@ -18,7 +18,7 @@ jobs:
   default:
     uses: ./.github/workflows/run_pip-audit_path.yml
     with:
-      project_path: ./assets/examples/empty-pyproject
+      project_path: ./assets/examples/uv-empty-pyproject
 
   #
   python__matrix:
@@ -34,7 +34,7 @@ jobs:
     name: python @ ${{ matrix.python-version }}
     uses: ./.github/workflows/run_pip-audit_path.yml
     with:
-      project_path: ./assets/examples/empty-pyproject
+      project_path: ./assets/examples/uv-empty-pyproject
       python-version: ${{ matrix.python-version }}
 
   #
