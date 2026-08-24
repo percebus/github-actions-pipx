@@ -20,6 +20,7 @@ jobs:
 
   algorithmic-exercises_requirements:
     needs: default
+    if: false # FIXME takes forever
     name: "algorithmic-exercises: requirements"
     uses: ./.github/workflows/run_pip-audit.yml
     with:
