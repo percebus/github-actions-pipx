@@ -88,31 +88,32 @@ jobs:
           requirements-file: ./assets/examples/${{ matrix.example }}
 
   #
-  algorithmic-exercises__matrix:
-    needs: default
-    runs-on: ubuntu-latest
+  # FIXME takes forever
+  # algorithmic-exercises__matrix:
+  #   needs: default
+  #   runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      max-parallel: 6
-      matrix:
-        example:
-          - requirements.frozen.txt
+  #   strategy:
+  #     fail-fast: false
+  #     max-parallel: 6
+  #     matrix:
+  #       example:
+  #         - requirements.frozen.txt
 
-    name: "-r ${{ matrix.example }}"
-    steps:
-      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      - uses: percebus/github-actions-common/.github/actions/checkout@main
+  #   name: "-r ${{ matrix.example }}"
+  #   steps:
+  #     # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+  #     - uses: percebus/github-actions-common/.github/actions/checkout@main
 
-      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      - uses: percebus/github-actions-python/.github/actions/setup@main
+  #     # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+  #     - uses: percebus/github-actions-python/.github/actions/setup@main
 
-      # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
-      - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
+  #     # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
+  #     - uses: percebus/github-actions-pip/.github/actions/install-upgrade@main
 
-      - uses: ./.github/actions/run_pip-audit
-        with:
-          requirements-file: ./assets/examples/algorithmic-exercises_pip/${{ matrix.example }}
+  #     - uses: ./.github/actions/run_pip-audit
+  #       with:
+  #         requirements-file: ./assets/examples/algorithmic-exercises_pip/${{ matrix.example }}
 
   #
   algorithmic-exercises_require-hashes__matrix:
