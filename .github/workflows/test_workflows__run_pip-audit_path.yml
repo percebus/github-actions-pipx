@@ -40,7 +40,6 @@ jobs:
   #
   pyproject_toml__matrix:
     needs: default
-    # if: false # FIXME pip-audit does NOT like algorithmic-exercises
     strategy:
       fail-fast: false
       max-parallel: 6
@@ -52,3 +51,4 @@ jobs:
     uses: ./.github/workflows/run_pip-audit_path.yml
     with:
       project_path: ./assets/examples/${{ matrix.example }}
+      

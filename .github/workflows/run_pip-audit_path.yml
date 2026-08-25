@@ -163,4 +163,5 @@ jobs:
       # nosemgrep: yaml.github-actions.security.run-shell-injection.run-shell-injection # FIXME
       - run: pipx run -- pip-audit ${{ inputs.project_path }} ${{ inputs.pip-audit_cli_arguments }}
         name: pip-audit
+        pip-audit_cli_arguments: "--project poetry --locked"
         continue-on-error: ${{ inputs.continue-on-error }}
