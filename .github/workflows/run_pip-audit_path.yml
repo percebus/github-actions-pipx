@@ -1,4 +1,4 @@
-name: pipx run pip-audit
+name: pipx run pip-audit {path}
 
 on:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
