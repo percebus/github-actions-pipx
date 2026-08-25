@@ -38,17 +38,17 @@ jobs:
       python-version: ${{ matrix.python-version }}
 
   #
-  poetry__matrix:
+  pyproject_toml__matrix:
     needs: default
     strategy:
       fail-fast: false
       max-parallel: 6
       matrix:
         example:
+          # FIXME doesn't find vulnerabilities
           - algorithmic-exercises_poetry
 
     name: ${{ matrix.example }}
     uses: ./.github/workflows/run_pip-audit_path.yml
     with:
       project_path: ./assets/examples/${{ matrix.example }}
-
