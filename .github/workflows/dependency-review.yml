@@ -46,12 +46,31 @@ on:
       # NOTE: ^^^ github-actions-pip/.../install-upgrade
 
       #
-      # NOTE: github-actions-pipx/.../run_pip-audit
+      # NOTE: vvv run_pip-audit
+      pip-audit_cli_arguments:
+        type: string
+        description: Options to pass to the pip-audit command
+        required: false
+        default: ""
+
       audit-requirements-file:
         type: string
         description: Path to the requirements file
         required: false
         default: ./requirements.txt
+
+      release-requirements-file:
+        type: string
+        description: Path to the requirements file
+        required: false
+        default: ""
+
+      continue-on-error:
+        type: boolean
+        description: Whether to continue on error
+        required: false
+        default: false
+      # NOTE: ^^^ run_pip-audit
 
 permissions:
   contents: read
@@ -68,7 +87,7 @@ jobs:
 
   # NOTE: is this job redundant?
   # does dependency-review-action accomplish the same, and more?
-  audit:
+  pip-audit:
     # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
     uses: percebus/github-actions-pipx/.github/workflows/run_pip-audit.yml@main
     name: pipx run
@@ -86,7 +105,10 @@ jobs:
       upgrade-requirements-file: ${{ inputs.upgrade-requirements-file }}
 
       # github-actions-pipx/.../run_pip-audit
+      pip-audit_cli_arguments: ${{ inputs.pip-audit_cli_arguments }}
       audit-requirements-file: ${{ inputs.audit-requirements-file }}
+      release-requirements-file: ${{ inputs.release-requirements-file }}
+      continue-on-error: ${{ inputs.continue-on-error }}
 
   semgrep_ci:
     uses: percebus/github-actions-pipx/.github/workflows/run_semgrep_ci.yml@main
