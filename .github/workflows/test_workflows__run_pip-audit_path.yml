@@ -38,7 +38,7 @@ jobs:
       python-version: ${{ matrix.python-version }}
 
   #
-  pyproject_toml__matrix:
+  poetry__matrix:
     needs: default
     strategy:
       fail-fast: false
@@ -51,4 +51,4 @@ jobs:
     uses: ./.github/workflows/run_pip-audit_path.yml
     with:
       project_path: ./assets/examples/${{ matrix.example }}
-      
+      pip-audit_cli_arguments: "--project poetry --locked"
